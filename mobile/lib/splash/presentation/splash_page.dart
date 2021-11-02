@@ -16,7 +16,6 @@ class SplashPage extends StatelessWidget {
         () => AutoRouter.of(context)
             .pushAndPopUntil(const LoginRoute(), predicate: (route) => false));
     return Scaffold(
-      backgroundColor: kColorBlue,
       body: SafeArea(
         child: Center(
           child: Column(

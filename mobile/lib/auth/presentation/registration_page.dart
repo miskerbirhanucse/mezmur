@@ -1,13 +1,12 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/auth/presentation/widget/registration_widget.dart';
 import 'package:mobile/core/constant/constant.dart';
 import 'package:mobile/core/router/app_router.gr.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegistrationPage extends StatelessWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +21,12 @@ class LoginPage extends StatelessWidget {
                 'assets/images/AM.svg',
                 height: 139,
               ),
-              kSizedBox,
               const Text(
-                "LOGIN",
+                "REGISTER",
                 style: TextStyle(color: kColorWhite, fontSize: 16),
               ),
               const SizedBox(
-                height: 60,
+                height: 40,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -99,44 +97,59 @@ class LoginPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: TextFormField(
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white10,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: SvgPicture.asset(
+                        'assets/images/lock.svg',
+                      ),
+                    ),
+                    prefixIconConstraints: const BoxConstraints(
+                      minHeight: 28,
+                      minWidth: 40,
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: SvgPicture.asset('assets/images/eye.svg'),
+                    ),
+                    suffixIconConstraints: const BoxConstraints(
+                      minHeight: 28,
+                      minWidth: 50,
+                    ),
+                    hintText: "Confirm Password",
+                    hintStyle: const TextStyle(color: Colors.white54),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: SizedBox(
-                  height: 40,
+                  height: 50,
                   width: width,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        AutoRouter.of(context).push(const VerificationRoute());
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: kColorOrange,
                       ),
-                      child: const Text("LOGIN")),
+                      child: const Text("Registration")),
                 ),
               ),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Forgot Password ?",
-                    style: TextStyle(color: kColorWhite, fontSize: 16),
-                  )),
-              const SizedBox(
-                height: 120,
-              ),
-              const Text(
-                "Don't have an account ?",
-                style: TextStyle(color: kColorWhite, fontSize: 16),
-              ),
-              TextButton(
-                onPressed: () {
-                  AutoRouter.of(context).pushAndPopUntil(
-                      const RegistrationRoute(),
-                      predicate: (_) => false);
-                },
-                child: const Text(
-                  "Register",
-                  style: TextStyle(
-                      color: kColorOrange,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                ),
-              ),
+              kSizedBox,
+              const RegistrationWidget(),
             ],
           ),
         ),
